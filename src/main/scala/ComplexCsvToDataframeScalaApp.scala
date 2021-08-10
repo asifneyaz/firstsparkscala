@@ -3,14 +3,13 @@ import org.apache.spark.sql.SparkSession
 /**
  * CSV ingestion in a dataframe.
  *
- * @author rambabu.posa
  */
 object ComplexCsvToDataframeScalaApp {
 
   /**
    * main() is your entry point to the application.
    *
-   * @param args
+   *
    */
   def main(args: Array[String]): Unit = {
 
@@ -27,14 +26,16 @@ object ComplexCsvToDataframeScalaApp {
 
     // Reads a CSV file with header, called books.csv, stores it in a
     // dataframe
+    val is_multiline = true
+    val is_inferSchema = true
     val df = spark.read
       .format("csv")
       .option("header", "true")
-      .option("multiline", true)
+      .option("multiline", is_multiline)
       .option("sep", ";")
       .option("quote", "*")
       .option("dateFormat", "MM/dd/yyyy")
-      .option("inferSchema", true)
+      .option("inferSchema", is_inferSchema)
       .load("data/books.csv")
 
     println("Excerpt of the dataframe content:")
