@@ -18,6 +18,10 @@ object flight {
     sqlway.show(100)
     val maxcount = spark.sql("""SELECT max(COUNT) FROM flight_data_view""")
     maxcount.show(1)
+    val dataframeway = flightdata
+      .groupBy("DEST_COUNTRY_NAME")
+      .count()
+    dataframeway.show(100)
   }
 
 }
